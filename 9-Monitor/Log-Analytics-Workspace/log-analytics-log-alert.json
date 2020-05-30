@@ -1,0 +1,66 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "workspacename" : {
+            "type" : "string"
+        },
+        "location": {
+            "type": "string"
+        },
+        "actionGroupId" : {
+            "type" : "string"
+        }
+    },
+    "variables": {
+        "alertName": "Cloud_Infra_InfraPubCloudSupport_FailedBackupJob",
+        "alertDescription": "Alert for failed backup job",
+        "alertStatus": "true",
+        "SourceId": "[concat('/subscriptions/', subscription().subscriptionId, '/resourceGroups/', resourcegroup().name , '/providers/Microsoft.OperationalInsights/workspaces/', parameters('workspacename'))]",
+        "alertSource":{
+            "Query":"AzureDiagnostics | where columnifexists(\"Category\",'defaultValue') == \"AzureBackupReport\" | where columnifexists(\"SchemaVersion_s\", 'defaultValue') == \"V2\" | where columnifexists(\"OperationName\", 'defaultValue') == \"Job\" and columnifexists(\"JobOperation_s\", 'defaultValue') == \"Backup\" | where columnifexists(\"JobStatus_s\", 'defaultValue') == \"Failed\" | extend ResourceId",
+            "Type":"ResultCount"
+        },
+        "alertSchedule":{
+            "Frequency": 30,
+            "Time": 30
+        },
+        "alertActions":{
+            "SeverityLevel": "3"
+        },
+        "alertTrigger":{
+            "Operator":"GreaterThan",
+            "Threshold":"1"
+        }
+    },
+    "resources":[ {
+        "name":"[variables('alertName')]",
+        "type":"Microsoft.Insights/scheduledQueryRules",
+        "apiVersion": "2018-04-16",
+        "location": "[parameters('location')]",
+        "properties":{
+            "description": "[variables('alertDescription')]",
+            "enabled": "[variables('alertStatus')]",
+            "source": {
+                "query": "[variables('alertSource').Query]",
+                "dataSourceId": "[variables('SourceId')]",
+                "queryType":"[variables('alertSource').Type]"
+            },
+            "schedule":{
+                "frequencyInMinutes": "[variables('alertSchedule').Frequency]",
+                "timeWindowInMinutes": "[variables('alertSchedule').Time]"
+            },
+            "action":{
+                "odata.type": "Microsoft.WindowsAzure.Management.Monitoring.Alerts.Models.Microsoft.AppInsights.Nexus.DataContracts.Resources.ScheduledQueryRules.AlertingAction",
+                "severity":"[variables('alertActions').SeverityLevel]",
+                "aznsAction":{
+                    "actionGroup" : ["[parameters('actionGroupId')]"]
+                 },
+                "trigger":{
+                    "thresholdOperator":"[variables('alertTrigger').Operator]",
+                    "threshold":"[variables('alertTrigger').Threshold]"
+                }
+            }
+        }
+    } ]
+}

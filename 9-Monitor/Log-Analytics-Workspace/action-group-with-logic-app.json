@@ -1,0 +1,42 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "action-group-name" : {
+            "type": "string"
+        },
+        "logicAppName" : {
+            "type" : "string"
+        },
+        "actionGroupShortName": {
+            "type" : "string"
+        },
+        "logicAppResourceId" : {
+            "type" : "string"
+        }
+
+    },
+    "variables": {  },
+    "resources": [
+        {
+            "name": "[parameters('action-group-name')]",
+            "type": "microsoft.insights/actionGroups",
+            "apiVersion": "2019-06-01",
+            "location": "Global",
+            "tags": {
+            },
+            "properties": {
+                "groupShortName": "[parameters('actionGroupShortName')]",
+                "enabled": true,
+                "logicAppReceivers": [
+                    {
+                        "name": "[parameters('logicAppName')]",
+                        "resourceId": "[parameters('logicAppResourceId')]",
+                        "callbackUrl": "[listCallbackURL(concat(parameters('logicAppResourceId'), '/triggers/manual'), '2016-06-01').value]",
+                        "useCommonAlertSchema": true
+                    }
+                ]
+            }
+        }
+    ]
+}
