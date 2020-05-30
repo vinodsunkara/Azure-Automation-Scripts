@@ -1,52 +1,52 @@
 ## List of Azure Resources
 
 ### General
-Subscriptions
-Resource Groups
+* Subscriptions
+* Resource Groups
 
 ### Compute
-Virtual Machines
-Virtual Machine Scale sets
-Disk
+* Virtual Machines
+* Virtual Machine Scale sets
+* Disk
 
 ### Networking
-Virtual Network
-Load Balancer
-Virtual Network Gateway
-NSG
-NIC (Network Interface Card)
-Public IP Address
-Bastion
-Private Link
-DNS Zone
+* Virtual Network
+* Load Balancer
+* Virtual Network Gateway
+* NSG
+* NIC (Network Interface Card)
+* Public IP Address
+* Bastion
+* Private Link
+* DNS Zone
 
 ### Storage
-Storage Accounts
-Recovery Service Vaults
+* Storage Accounts
+* Recovery Service Vaults
 
 ### Web
-App Service Plan
-App Service
-Function App
+* App Service Plan
+* App Service
+* Function App
 
 ### Container 
-ACR
-ACS
-AKS
+* ACR
+* ACS
+* AKS
 
 ### Databases
-Azure Cosmos DB
-Azure SQL
-Azure Database for MySQL
-Azure Database for PostgreSQL
+* Azure Cosmos DB
+* Azure SQL
+* Azure Database for MySQL
+* Azure Database for PostgreSQL
 
 ### Security
-Key Vaults
-MFA
+* Key Vaults
+* MFA
 
 ### Monitor
-Monitor
-Metrics
-Alerts
-Log Analytics Workspace
+* Monitor
+* Metrics
+* Alerts
+* Log Analytics Workspace
 
