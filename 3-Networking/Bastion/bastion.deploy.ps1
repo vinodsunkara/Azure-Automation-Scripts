@@ -1,4 +1,3 @@
-#Using Module "..\..\..\commonCode\common.module.psm1" 
 #Input Parameters
 param (
     [Parameter(Mandatory=$false)][string]$subscription ,
@@ -26,12 +25,9 @@ if($subnetAddressCheck -ge 27){
 
 if($subnetAddressFlag){
     #Login
-    #Azure-Login($environment)
-    az login 
-    az account set -s $subscription
-
-    #Set subscription context
-    #Set-Subscription($subscription)
+    Write-Host "Azure Login.........."
+    & $azcli login 
+    & $azcli account set -s $subscription
 
     #Get the details of VNet
     Write-Host "INFO: Retriving the details of Virtual Network [$vnetName]"

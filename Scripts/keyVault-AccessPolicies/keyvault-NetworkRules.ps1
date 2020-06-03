@@ -1,12 +1,9 @@
-[CmdletBinding()]
-param (
-    [Parameter(Mandatory = $false)][string]$environment = 'dev'
-)
-
-az login
-#Azure-Login($environment)
-
+#Variables
 $azcli = "C:\Program Files (x86)\Microsoft SDKs\Azure\CLI2\wbin\az.cmd"
+
+Write-Host "Azure Login.............."
+& $azcli login
+
 Write-Host "Retrieving details of all subscriptions..."
 
 $subscriptionIds = & $azcli account list --query "[].id" -o tsv
