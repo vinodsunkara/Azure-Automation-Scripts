@@ -1,12 +1,10 @@
-# This script is to create a new winows vm using azure cli. 
+# This script is to create a new linux vm using azure cli. 
 
 #Parameters
 param (
     [Parameter(Mandatory=$false)][string]$subscription = "" ,
     [Parameter(Mandatory=$false)][string]$name = "" ,
-    [Parameter(Mandatory=$false)][string]$location = "" ,
-    [Parameter(Mandatory=$false)][string]$adminUserName = "" ,
-    [Parameter(Mandatory=$false)][string]$AdminPassword = ""
+    [Parameter(Mandatory=$false)][string]$location = "" 
 )
 
 #Variables
@@ -31,21 +29,21 @@ if(!$?){
     Write-Host "INFO: Successfully created the resource group [$name]"
 }
 
-Write-Host "INFO: Creating Windows virtual machine.."
-& $azcli vm create --resource-group $resourceGroup.name --name $name --image win2016datacenter --admin-username $adminUserName --admin-password $AdminPassword --location $location
+Write-Host "INFO: Creating windows app service plan.."
+& $azcli appservice plan create --name $name --resource-group $resourceGroup.name --location $location --sku FREE | Out-Null
 if(!$?){
-    Write-Host "ERROR: Could not create the windows virtual machine [$name]"
+    Write-Host "ERROR: Could not create an appservice plan [$name]"
     Write-Host "Script has been aborted" -ErrorAction Stop
 }else{
-    Write-Host "INFO: Successfully created the virtual machine [$name]"
+    Write-Host "INFO: Successfully created an appservice plan [$name]"
 }
 
-#Configure the VM
-Write-Host "INFO: Opening port 3389 for RDP connection..."
-& $azcli vm open-port --port 3389 --resource-group $resourceGroup.name --name $name
+#Create web app
+Write-Host "INFO: Creating windows web app..."
+& $azcli webapp create --resource-group $resourceGroup.name --plan $name --name $name
 if(!$?){
-    Write-Host "ERROR: Could not open the port 3389 for windows virtual machine [$name]"
+    Write-Host "ERROR: Could not create the web app [$name]"
     Write-Host "Script has been aborted" -ErrorAction Stop
 }else{
-    Write-Host "INFO: Successfully opened the port 3389 for virtual machine [$name]"
+    Write-Host "INFO: Successfully created the web app [$name]"
 }

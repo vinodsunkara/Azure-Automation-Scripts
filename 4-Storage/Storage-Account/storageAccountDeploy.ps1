@@ -22,8 +22,8 @@ for($parameter=0; $parameter -lt @($PsBoundParameters).Keys.Length; $parameter++
 #Variables
 $azcli = "C:\Program Files (x86)\Microsoft SDKs\Azure\CLI2\wbin\az.cmd"
 $baseRepoPath = "$env:SYSTEM_DEFAULTWORKINGDIRECTORY"
-$username = "7457ba0a-33d2-4ce3-a04c-e127dcc14242"
-$tenant = "bcad51b8-ef4c-4445-b8e2-b6389e3529bc"
+$username = ""
+$tenant = ""
 $password = "$baseRepoPath\_DevOps\certificate\Cert.pem"
 if($storageAccountName -eq ""){
     $storageAccountName = $lobPrefix.Replace('-','') + $project + $environment 

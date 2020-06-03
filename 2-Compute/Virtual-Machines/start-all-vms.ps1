@@ -2,7 +2,7 @@
 
 #Parameters
 param (
-    [Parameter(Mandatory=$false)][string]$subscription = "9eb0392a-3427-4e5c-9356-e9026ba51da1"
+    [Parameter(Mandatory=$false)][string]$subscription = ""
 )
 
 #Variables

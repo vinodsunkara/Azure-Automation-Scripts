@@ -1,13 +1,13 @@
 #Get subscription and log analytics details from csv file
-$inputCsvFile = "C:\Personal Files\Freelance\Vinod\log-analytics-alerts\subscription.csv"
+$inputCsvFile = "subscription.csv"
 $inputContents = Get-Content $inputCsvFile | ConvertFrom-Csv
 
 #variables
 $azcli = "C:\Program Files (x86)\Microsoft SDKs\Azure\CLI2\wbin\az.cmd"
 
 #Logic App Resource Ids
-$snowMetricIncidentLogicAppId = "/subscriptions/260301c2-03cb-4eb0-a36b-6868f88bd6fe/resourceGroups/ITS-ITS-HUB-PROD-EUA01-LA-RG/providers/Microsoft.Logic/workflows/SNOW_IncidentCreation_MetricAlerts"
-$snowLogAlertIncidentLogicAppId = "/subscriptions/260301c2-03cb-4eb0-a36b-6868f88bd6fe/resourceGroups/ITS-ITS-HUB-PROD-EUA01-LA-RG/providers/Microsoft.Logic/workflows/SNOW_IncidentCreation_LogAlerts"
+$snowMetricIncidentLogicAppId = ""
+$snowLogAlertIncidentLogicAppId = ""
 
 #Login
 #Azure-Login($environment)

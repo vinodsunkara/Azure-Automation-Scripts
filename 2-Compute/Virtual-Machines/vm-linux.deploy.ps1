@@ -2,11 +2,11 @@
 
 #Parameters
 param (
-    [Parameter(Mandatory=$false)][string]$subscription = "9eb0392a-3427-4e5c-9356-e9026ba51da1" ,
-    [Parameter(Mandatory=$false)][string]$name = "vinod-linux-vm" ,
-    [Parameter(Mandatory=$false)][string]$location = "centralus" ,
-    [Parameter(Mandatory=$false)][string]$adminUserName = "vinodsunkara" ,
-    [Parameter(Mandatory=$false)][string]$AdminPassword = "Microsoft@123"
+    [Parameter(Mandatory=$false)][string]$subscription = "" ,
+    [Parameter(Mandatory=$false)][string]$name = "" ,
+    [Parameter(Mandatory=$false)][string]$location = "" ,
+    [Parameter(Mandatory=$false)][string]$adminUserName = "" ,
+    [Parameter(Mandatory=$false)][string]$AdminPassword = ""
 )
 
 #Variables
